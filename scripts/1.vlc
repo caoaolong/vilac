@@ -1,0 +1,4 @@
+void main(string[] args)
+{
+    printf("%s\n", "Hello,World!");
+}
