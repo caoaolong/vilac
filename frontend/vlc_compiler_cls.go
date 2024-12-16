@@ -2,8 +2,6 @@ package frontend
 
 import (
 	"fmt"
-	list "github.com/duke-git/lancet/v2/datastructure/list"
-	stack "github.com/duke-git/lancet/v2/datastructure/stack"
 	"io"
 	"math"
 	"os"
@@ -12,19 +10,6 @@ import (
 	"sync"
 	"vilac/consts"
 )
-
-type VlcFile struct {
-	Name       string
-	Data       string
-	File       *os.File
-	Info       os.FileInfo
-	Line       int
-	Column     int
-	Index      int
-	Tokens     []*VlcToken
-	ScopeStack stack.LinkedStack[*VlcScope]
-	Scopes     list.List[*VlcScope]
-}
 
 type VlcCompiler struct {
 	Files       []VlcFile
@@ -40,6 +25,14 @@ func NewVlcCompiler(files []VlcFile) *VlcCompiler {
 		_vc.Files = files
 	})
 	return _vc
+}
+
+func (vc *VlcCompiler) Sources() []*VlcFile {
+	var sources = make([]*VlcFile, 0)
+	for _, file := range vc.Files {
+		sources = append(sources, &file)
+	}
+	return sources
 }
 
 func (vc *VlcCompiler) Compile() error {
@@ -114,6 +107,12 @@ func (vc *VlcCompiler) parseTokens() error {
 	var isString = false
 	for i := 0; i < len(vcf.Data); i++ {
 		var token = rune(vcf.Data[i])
+		if token == '\n' {
+			vcf.Line++
+			vcf.Column = 0
+		} else {
+			vcf.Column++
+		}
 		switch token {
 		case '"':
 			isString = !isString

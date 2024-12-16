@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"vilac/backend"
 	"vilac/frontend"
 )
 
@@ -15,7 +16,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, token := range vc.CurrentFile.Tokens {
-		log.Println(token)
-	}
+	var vg = backend.NewVlcGenerator(vc.Sources())
+	vg.Generate()
 }
