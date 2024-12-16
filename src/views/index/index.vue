@@ -14,9 +14,7 @@ import {Code, Terminal, Chalkboard} from '@vicons/fa'
           <template #1>
             <n-layout>
               <docker-header title="Code" :icon="Code"/>
-              <n-layout-content>
-                <code-view/>
-              </n-layout-content>
+              <code-view/>
             </n-layout>
           </template>
           <template #2>
