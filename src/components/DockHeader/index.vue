@@ -4,6 +4,7 @@ defineProps({
   title: null,
   icon: null
 })
+const emits = defineEmits(['close'])
 </script>
 
 <template>
@@ -13,7 +14,7 @@ defineProps({
       <h4>{{ title }}</h4>
     </div>
     <div class="dock-header-title dock-header-right">
-      <n-icon :size="18" :component="Close"/>
+      <n-icon :size="18" :component="Close" @click="emits('close')"/>
     </div>
   </n-layout-header>
 </template>
