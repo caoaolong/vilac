@@ -9,9 +9,9 @@
       <n-space>
         <n-popover v-for="button in breakButtons" :delay="500">
           <template #trigger>
-            <n-button size="small" quaternary circle>
+            <n-button size="small" quaternary circle @click="button.click(button)">
               <template #icon>
-                <n-icon :component="button.icon" />
+                <n-icon :component="button.icon"/>
               </template>
             </n-button>
           </template>
@@ -57,20 +57,25 @@ import {
 
 import {Code, Terminal, Chalkboard} from '@vicons/fa'
 
-const emits = defineEmits(['showCode', 'hideCode', 'showConsole', 'hideConsole', 'showPlayground', 'hidePlayground'])
+const emits = defineEmits([
+    'showCode', 'hideCode', 'showConsole', 'hideConsole', 'showPlayground', 'hidePlayground',
+    'stepInto', 'stepOut', 'stepPass'])
 
 const breakButtons = [
   {
     tooltip: "步过",
-    icon: ArrowImport20Filled
+    icon: ArrowImport20Filled,
+    click: () => emits('stepPass')
   },
   {
     tooltip: "步入",
-    icon: ArrowDownload24Filled
+    icon: ArrowDownload24Filled,
+    click: () => emits('stepInto')
   },
   {
     tooltip: "步出",
-    icon: ArrowExportUp24Filled
+    icon: ArrowExportUp24Filled,
+    click: () => emits('stepOut')
   }
 ]
 

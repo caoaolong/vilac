@@ -1,0 +1,24 @@
+{
+  "lines": [
+    {
+      "number": 1,
+      "value": "void main(string[] args)",
+      "type": "func_define"
+    },
+    {
+      "number": 2,
+      "value": "{",
+      "type": "func_begin"
+    },
+    {
+      "number": 3,
+      "value": "\tprintf(\"%s\\n\", \"Hello,World!\");",
+      "type": "print"
+    },
+    {
+      "number": 4,
+      "value": "}",
+      "type": "func_end"
+    }
+  ]
+}

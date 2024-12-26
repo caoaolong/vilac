@@ -8,7 +8,9 @@ hljs.registerLanguage('c', c)
 
 <template>
   <n-config-provider :theme="darkTheme" :hljs="hljs">
-    <router-view/>
+    <n-message-provider>
+      <router-view/>
+    </n-message-provider>
   </n-config-provider>
 </template>
 

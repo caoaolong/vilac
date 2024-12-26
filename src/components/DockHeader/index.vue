@@ -2,9 +2,10 @@
 import { Close } from '@vicons/ionicons5'
 defineProps({
   title: null,
-  icon: null
+  icon: null,
+  toolbars: Array
 })
-const emits = defineEmits(['close'])
+const emits = defineEmits(['close', 'toolbar'])
 </script>
 
 <template>
@@ -14,6 +15,13 @@ const emits = defineEmits(['close'])
       <h4>{{ title }}</h4>
     </div>
     <div class="dock-header-title dock-header-right">
+      <n-popover v-for="item in toolbars" :delay="500">
+        <template #trigger>
+          <n-icon  :size="16" :component="item.icon" @click="emits('toolbar', item.action)"/>
+        </template>
+        <span>{{ item.label }}</span>
+      </n-popover>
+      <n-divider vertical/>
       <n-icon :size="18" :component="Close" @click="emits('close')"/>
     </div>
   </n-layout-header>
